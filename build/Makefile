@@ -153,6 +153,30 @@ RandomSort.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/RandomSort.cpp.s
 .PHONY : RandomSort.cpp.s
 
+ThreadPool.o: ThreadPool.cpp.o
+.PHONY : ThreadPool.o
+
+# target to build an object file
+ThreadPool.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/ThreadPool.cpp.o
+.PHONY : ThreadPool.cpp.o
+
+ThreadPool.i: ThreadPool.cpp.i
+.PHONY : ThreadPool.i
+
+# target to preprocess a source file
+ThreadPool.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/ThreadPool.cpp.i
+.PHONY : ThreadPool.cpp.i
+
+ThreadPool.s: ThreadPool.cpp.s
+.PHONY : ThreadPool.s
+
+# target to generate assembly for a file
+ThreadPool.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/ThreadPool.cpp.s
+.PHONY : ThreadPool.cpp.s
+
 ThreadPoolTest.o: ThreadPoolTest.cpp.o
 .PHONY : ThreadPoolTest.o
 
@@ -189,6 +213,9 @@ help:
 	@echo "... RandomSort.o"
 	@echo "... RandomSort.i"
 	@echo "... RandomSort.s"
+	@echo "... ThreadPool.o"
+	@echo "... ThreadPool.i"
+	@echo "... ThreadPool.s"
 	@echo "... ThreadPoolTest.o"
 	@echo "... ThreadPoolTest.i"
 	@echo "... ThreadPoolTest.s"

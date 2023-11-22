@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/test.dir/RandomSort.cpp.o"
   "CMakeFiles/test.dir/RandomSort.cpp.o.d"
+  "CMakeFiles/test.dir/ThreadPool.cpp.o"
+  "CMakeFiles/test.dir/ThreadPool.cpp.o.d"
   "CMakeFiles/test.dir/ThreadPoolTest.cpp.o"
   "CMakeFiles/test.dir/ThreadPoolTest.cpp.o.d"
   "test"

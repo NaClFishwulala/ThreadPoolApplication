@@ -1,3 +1,3 @@
 cmake_minimum_required(VERSION 3.22)
 project(ThreadPoolApplication)                                   
-add_executable(test ThreadPoolTest.cpp RandomSort.cpp)
+add_executable(test ThreadPoolTest.cpp RandomSort.cpp ThreadPool.cpp)

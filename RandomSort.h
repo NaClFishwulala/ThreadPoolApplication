@@ -4,6 +4,8 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include<algorithm>
+
 using namespace std;
 
 class RandomSort
@@ -17,6 +19,8 @@ public:
     ~RandomSort();
 
     void MyFileSort();
+    void PrintSortedNums();
+    vector<int64_t> GetSortedNums();
 };
 
 

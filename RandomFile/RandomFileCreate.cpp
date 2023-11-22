@@ -13,7 +13,7 @@ int main()
     ofstream fout;
     string fileName = "./random" + to_string(1) + ".txt";
     fout.open(fileName);
-    for(int i = 0; i < 1000; i++) {
+    for(int i = 0; i < 1024*1024; i++) {
         int64_t random_number = dis(gen);
         fout << dis(gen) << " ";
     }
