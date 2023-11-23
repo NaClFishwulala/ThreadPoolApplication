@@ -8,12 +8,8 @@
 using namespace std;
 int main()
 {
-    // string fileName = "../RandomFile/random1.txt";
-    // CLRandomSort rs(fileName.c_str());
-    // rs.MyFileSort();
-    // vector<int64_t> ret = rs.GetSortedNums();
-
-    CLThreadPool mainThread;
+    // CLThreadPool mainThread;
+    CLThreadPool& mainThread = CLThreadPool::GetInstance();
     mainThread.ThreadPoolStart();
 
     return 0;

@@ -15,18 +15,27 @@ private:
     vector<thread> threadLists;
     vector<int64_t> retNums;
     vector<string> fileNames;
-    static queue<vector<int64_t>> messageQue;
-    static mutex messageQueMutex;
+    // static queue<vector<int64_t>> messageQue;
+    // static mutex messageQueMutex;
+    queue<vector<int64_t>> messageQue;
+    mutex messageQueMutex;
     int threadCount;
+
 public:
+    
     CLThreadPool();
     ~CLThreadPool();
 
     void ThreadPoolStart();
-    static void ThreadRun(string fileName);
+    // static void ThreadRun(string fileName);
+    void ThreadRun(string fileName);
 
     void SetRetNums(vector<int64_t> nums);
     void SaveRetNums();
+
+    static CLThreadPool& GetInstance();
+
+    void MergeSort(vector<int64_t> &nums);
 };
 
 

@@ -2,8 +2,8 @@
 #include "CLListDirCont.h"
 #include "CLRandomSort.h"
 
-queue<vector<int64_t>> CLThreadPool::messageQue;
-mutex CLThreadPool::messageQueMutex;
+// queue<vector<int64_t>> CLThreadPool::messageQue;
+// mutex CLThreadPool::messageQueMutex;
 
 CLThreadPool::CLThreadPool()
 {
@@ -19,6 +19,10 @@ CLThreadPool::CLThreadPool()
 
 CLThreadPool::~CLThreadPool()
 {
+    for(int i = 0; i < fileNames.size(); i++) {
+        threadLists[i].join();
+    }
+    SaveRetNums();
 }
 
 
@@ -31,28 +35,29 @@ void CLThreadPool::ThreadRun(string fileName)
     messageQue.push(ret);
     cout << fileName << " push" << endl;
     messageQueMutex.unlock();
-    
     return;
 }
 
 void CLThreadPool::ThreadPoolStart()
 {
     for(int i = 0; i < fileNames.size(); i++) {
-        threadLists.push_back(thread(ThreadRun, fileNames[i]));
+        threadLists.push_back(thread(&CLThreadPool::ThreadRun, this, fileNames[i]));
         threadCount++;
-        threadLists[i].detach();
     }
     cout << "main thread" << endl;
     while(threadCount != 0) {
-        messageQueMutex.lock();
         if(!messageQue.empty()) {
+            vector<int64_t> messageNums;
+            messageQueMutex.lock();
+            messageNums = messageQue.front();
             messageQue.pop();
             threadCount--;
             cout << "messageQue pop, threadCount: " << threadCount << endl;
+            messageQueMutex.unlock();
+            MergeSort(messageNums);
         }
-        messageQueMutex.unlock();
+
     }
-    
 }
 
 void CLThreadPool::SetRetNums(vector<int64_t> nums)
@@ -62,11 +67,43 @@ void CLThreadPool::SetRetNums(vector<int64_t> nums)
 
 void CLThreadPool::SaveRetNums()
 {
-    string outFileName = "../RandomFile/outfile.txt";
+    string outFileName = "../outfile.txt";
     ofstream fout;
     fout.open(outFileName.c_str());
     for(int i = 0; i < retNums.size(); i++) {
         fout << retNums[i] << " ";
     }
     fout.close();
+}
+
+CLThreadPool& CLThreadPool::GetInstance()
+{
+    static CLThreadPool m_threadPool;
+    return m_threadPool;
+}
+
+void  CLThreadPool::MergeSort(vector<int64_t> &nums)
+{
+    int i = 0;
+    int j = 0;
+    vector<int64_t> newNums;
+    while(i < retNums.size() && j < nums.size()) {
+        if(retNums[i] <= nums[j]) {
+            newNums.push_back(retNums[i]);
+            i++;
+        } else {
+            newNums.push_back(nums[j]);
+            j++;
+        }
+    }
+    while(i < retNums.size()) {
+        newNums.push_back(retNums[i]);
+        i++;
+    }
+    while(j < nums.size()) {
+        newNums.push_back(nums[j]);
+        j++;
+    }
+    retNums = newNums;
+    return;
 }
